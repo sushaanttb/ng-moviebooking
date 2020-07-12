@@ -1,0 +1,7 @@
+<div class="card">
+  <input text="" placeholder="Username" [(ngModel)]="username" />
+  <input text="" placeholder="Password" type="password" [(ngModel)]="password" />
+  <div class="container">
+    <button (click)="onSubmit()" [disabled]="!username || !password">Login</button>
+  </div>
+</div>
