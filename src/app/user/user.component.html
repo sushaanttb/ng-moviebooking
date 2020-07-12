@@ -1,1 +1,19 @@
-Welcome to User Dashboard!
+Welcome <b>{{this.user.userName}}</b>,to the User dashboard!
+<span style="float: right;"><a routerLink="ticket"> My Tickets</a></span>
+<div >
+    <div class="card">
+        Get All Movie Slots
+      </div>
+    
+    <div class="card">
+        Get All Current Movies
+      </div>
+    
+      <div class="card">
+        Book Movie
+      </div>
+</div>
+
+      <router-outlet></router-outlet>
+
+

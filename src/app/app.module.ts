@@ -9,10 +9,11 @@ import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './user.service';
+import { TicketComponent } from './user/ticket/ticket.component';
 
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, UserComponent, AdminComponent],
+  declarations: [AppComponent, LoginComponent, UserComponent, AdminComponent, TicketComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [UserService],
   bootstrap: [AppComponent],

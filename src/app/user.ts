@@ -1,6 +1,7 @@
 export class User {
     public userName?: string;
     public isAdmin?: string;
+    public tickets?: any[];
 
     constructor(
         fields: {
@@ -8,6 +9,7 @@ export class User {
             password?: string,
             address?: string,
             isAdmin?: boolean
+            tickets?: any[]
         }
     ) {
         Object.assign(this, fields);

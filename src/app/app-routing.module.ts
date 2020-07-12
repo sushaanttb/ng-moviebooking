@@ -3,10 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
+import { TicketComponent } from './user/ticket/ticket.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'user', component: UserComponent },
+  {
+    path: 'user', component: UserComponent,
+    children: [{
+      path: 'ticket', component: TicketComponent
+    }]
+  },
   { path: 'admin', component: AdminComponent },
 ];
 
@@ -14,4 +20,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

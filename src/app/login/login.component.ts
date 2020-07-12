@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     this.userService.loginSubscription(this.username, this.password)
       .subscribe(
         (user: User) => {
-          if (!user.userName) alert("Username or Password is incorrect!")
+          if (!user) alert("Username or Password is incorrect!")
           else this.redirect(user);
         },
         (error: any) => alert("Some error occured.")
@@ -33,8 +33,8 @@ export class LoginComponent implements OnInit {
   }
 
   redirect(user: User): void {
-    alert("Welcome " + user.userName + "!");
 
+    localStorage.setItem('currentUser', JSON.stringify(user));
     // ToDo: JSON bug removes 'is' from boolean names
     // if (user.isAdmin) this.router.navigate(['/admin']);
     if (user['admin']) this.router.navigate(['/admin']);

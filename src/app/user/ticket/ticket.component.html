@@ -1,0 +1,15 @@
+<div *ngIf="this.user.tickets.length>0">
+
+    <h3>Ticket Details:</h3>
+    <div class="result">
+        {{this.user.tickets | json}}
+    </div>
+</div>
+
+<div *ngIf="this.user.tickets.length==0">
+    <h3 style="text-align: center;">No tickets!</h3>
+</div>
+
+<span style="float: right;"> 
+    <a href="javascript:void(0);" (click)="goBack()">Back to Dashboard</a>
+</span>
