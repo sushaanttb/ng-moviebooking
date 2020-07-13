@@ -15,7 +15,7 @@ export class UpdateMovieTheatreComponent implements OnInit {
     private location: Location) { }
 
   movieTheatres: MovieTheatre[] = [];
-  movieCapacities: Array<number> = [50, 100, 200];
+  movieCapacities: Array<number> = [10, 20, 50, 100, 200];
   movieTheatreSuccessMessage: string = "Movie Theatre updated successfully!";
   showSuccessMessage: boolean = false;
 

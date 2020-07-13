@@ -21,7 +21,7 @@ export class CreateMovieTheatreComponent implements OnInit {
   // movieSlots: Array<string> = ['MORNING', 'AFTERNOON', 'EVENING'];
   movieSlots: Array<string> = ['Morning', 'Afternoon', 'Evening'];
 
-  movieCapacities: Array<number> = [50, 100, 200];
+  movieCapacities: Array<number> = [10, 20, 50, 100, 200];
 
   ngOnInit(): void {
     this.addMovies();
