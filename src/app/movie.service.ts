@@ -35,4 +35,12 @@ export class MovieService {
     return this.http.put(movieTheatreAPI, movieTheatre);
   }
 
+  getAllEmptyMovieTheatresSubscription(): Observable<MovieTheatre[]> {
+    return this.http.get<MovieTheatre[]>(movieTheatreAPI + "/empty");
+  }
+
+  deleteMovieTheatreSubscription(id: string): Observable<Object> {
+    return this.http.delete(movieTheatreAPI + "?id=" + id);
+  }
+
 }

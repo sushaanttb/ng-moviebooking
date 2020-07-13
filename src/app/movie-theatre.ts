@@ -6,6 +6,7 @@ export class MovieTheatre {
         public name: string,
         public capacity: number,
         public movies: StringMap,
-        public currentMovie?: string
+        public currentMovie?: string,
+        public id?: string
     ) { }
 }

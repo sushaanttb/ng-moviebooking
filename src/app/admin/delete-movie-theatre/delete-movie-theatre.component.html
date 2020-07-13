@@ -1,1 +1,30 @@
-<p>delete-movie-theatre works!</p>
+
+<div style="float:right;">
+    <div *ngFor="let movieTheatre of movieTheatres" class="flip-card">
+        <div class= "flip-card-inner">
+            <div class="flip-card-front">
+                <h1>{{movieTheatre.name}}</h1>
+                <h5>{{movieTheatre.id}}</h5>
+                <p>{{movieTheatre.capacity}} seats</p>
+                            
+            </div>   
+       
+            <div class="flip-card-back">
+                <button style="background-color: rgb(228, 130, 117); padding: 5px; margin-top: 25%;" (click)="delete(movieTheatre)">Delete</button>
+                
+                <div *ngIf="showSuccessMessage" style="background-color:greenyellow;">{{movieTheatre.name}} deleted successfully!</div>
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="this.movieTheatres.length==0">
+    <h3 style="text-align: center;">No Empty Movie Theatres!</h3>
+</div>
+
+<div style="float: left;"> 
+    <a href="javascript:void(0);" (click)="goBack()">Back to Dashboard</a>
+</div>

@@ -3,19 +3,24 @@
         <div class= "flip-card-inner">
             <div class="flip-card-front">
                 <h1>{{movieTheatre.name}}</h1>
-                <p>{{movieTheatre.capacity}} seats</p>
+                <h5>{{movieTheatre.id}}</h5>
+                <p>{{movieTheatre.capacity}} seats</p>                
                 
-                <h3 style="text-align: left;">Movies:</h3>
-                <p *ngFor="let movie of getMovies(movieTheatre)" style="text-align: left;">{{movie}}</p>
                 
-                <p>Currently Showing : {{movieTheatre.currentMovie}}</p>   
+                <div *ngIf="movieTheatre.currentMovie">
+                    <h3 style="text-align: left;">Movies:</h3>
+                    <p *ngFor="let movie of getMovies(movieTheatre)" style="text-align: left;">{{movie}}</p>
                 
+                    <p>Currently Showing : {{movieTheatre.currentMovie}}</p>   
+                </div>
             </div>   
        
             <div class="flip-card-back">
                 <h3>Update</h3> 
                 <table>
-               
+                    
+                    <h5>Id: {{movieTheatre.id}}</h5>
+                    
                     <tr style="float: left;"> Name: <input  type="text" maxlength="15" [(ngModel)]="movieTheatre.name"></tr>
                
                     <tr style="float: left;">Capacity : 
@@ -30,7 +35,7 @@
                         </ul>
                     </tr>
                 
-                    <tr><button (click)="update(movieTheatre)">Update</button></tr>
+                    <tr><button style="background-color: darkseagreen; padding: 5px;"(click)="update(movieTheatre)">Update</button></tr>
 
                 </table>
                 

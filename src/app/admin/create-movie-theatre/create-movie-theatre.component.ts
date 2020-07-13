@@ -35,7 +35,9 @@ export class CreateMovieTheatreComponent implements OnInit {
   }
 
   submit() {
-    this.movieService.createMovieTheatreSubscription(this.name, this.capacity, this.movies)
+    let movies = this.movies.filter(m => m.name.length > 0);
+
+    this.movieService.createMovieTheatreSubscription(this.name, this.capacity, movies)
       .subscribe(
         (data: Response) => this.handleSuccess(),
         (error) => {
