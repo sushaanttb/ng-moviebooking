@@ -15,11 +15,8 @@ export class MovieService {
 
   constructor(private http: HttpClient) { }
 
-  createMovieTheatreSubscription(
-    name: string,
-    capacity: number,
-    movies: Array<MovieTheatreInterface>
-  ): Observable<Object> {
+  createMovieTheatreSubscription(name: string, capacity: number, movies: Array<MovieTheatreInterface>)
+    : Observable<Object> {
 
     // let moviesMap: Map<string, string> = new Map();
     let moviesMap: StringMap = {};
@@ -28,7 +25,14 @@ export class MovieService {
     let movieTheatreObj = new MovieTheatre(name, capacity, moviesMap);
 
     return this.http.post(movieTheatreAPI, movieTheatreObj);
+  }
 
+  getAllMovieTheatresSubscription(): Observable<MovieTheatre[]> {
+    return this.http.get<MovieTheatre[]>(movieTheatreAPI + "/all");
+  }
+
+  updateMovieTheatreSubscription(movieTheatre: MovieTheatre): Observable<Object> {
+    return this.http.put(movieTheatreAPI, movieTheatre);
   }
 
 }

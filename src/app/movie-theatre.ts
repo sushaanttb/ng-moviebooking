@@ -4,7 +4,8 @@ export class MovieTheatre {
 
     constructor(
         public name: string,
-        public capacity: Number,
-        public movies: StringMap
+        public capacity: number,
+        public movies: StringMap,
+        public currentMovie?: string
     ) { }
 }

@@ -1,1 +1,46 @@
-<p>update-movie-theatre works!</p>
+<div style="float:right;">
+    <div *ngFor="let movieTheatre of movieTheatres" class="flip-card">
+        <div class= "flip-card-inner">
+            <div class="flip-card-front">
+                <h1>{{movieTheatre.name}}</h1>
+                <p>{{movieTheatre.capacity}} seats</p>
+                
+                <h3 style="text-align: left;">Movies:</h3>
+                <p *ngFor="let movie of getMovies(movieTheatre)" style="text-align: left;">{{movie}}</p>
+                
+                <p>Currently Showing : {{movieTheatre.currentMovie}}</p>   
+                
+            </div>   
+       
+            <div class="flip-card-back">
+                <h3>Update</h3> 
+                <table>
+               
+                    <tr style="float: left;"> Name: <input  type="text" maxlength="15" [(ngModel)]="movieTheatre.name"></tr>
+               
+                    <tr style="float: left;">Capacity : 
+                        <select [(ngModel)]="movieTheatre.capacity" style="width: 50px">
+                            <option *ngFor="let capacity of movieCapacities" [value]="capacity">{{capacity}}</option>
+                        </select>
+                    </tr>
+                    
+                    <tr>
+                        <ul style="float: left;"> Movies:
+                            <li *ngFor="let movie of getMovies(movieTheatre); let i=index;">{{movie}}</li>
+                        </ul>
+                    </tr>
+                
+                    <tr><button (click)="update(movieTheatre)">Update</button></tr>
+
+                </table>
+                
+                <div *ngIf="showSuccessMessage" style="background-color: green;">{{movieTheatreSuccessMessage}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div style="float: left;"> 
+    <a href="javascript:void(0);" (click)="goBack()">Back to Dashboard</a>
+</div>
