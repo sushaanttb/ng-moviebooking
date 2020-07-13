@@ -51,7 +51,7 @@
 </table>
 
 
-<button style="background-color: darkseagreen; padding: 5px;" (click)="submit()">Create</button>
+<button [disabled] = "!name" style="background-color: darkseagreen; padding: 5px;" (click)="submit()">Create</button>
 
 
 
