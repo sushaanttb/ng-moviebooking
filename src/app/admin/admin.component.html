@@ -2,14 +2,16 @@ Welcome <b>{{this.adminUser.userName}}</b>,to the Admin dashboard!
 
 <div>
     <div class="card">
-        Create Movie theatre
+        <a routerLink="create-movie-theatre">Create Movie Theatre </a>
     </div>
 
     <div class="card">
-         Update Movie Theatre
+        <a routerLink="update-movie-theatre">Update Movie Theatre</a>
     </div>
 
     <div class="card">
-        Delete Movie Theatre
+        <a routerLink="delete-movie-theatre"> Delete Movie Theatre</a>
     </div>
 </div>
+
+<router-outlet></router-outlet>

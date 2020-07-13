@@ -2,18 +2,18 @@ Welcome <b>{{this.user.userName}}</b>,to the User dashboard!
 <span style="float: right;"><a routerLink="ticket"> My Tickets</a></span>
 <div >
     <div class="card">
-        Get All Movie Slots
-      </div>
+        <a routerLink="list-movie">Show All Movie Slots</a>
+    </div>
     
     <div class="card">
-        Get All Current Movies
-      </div>
+        <a routerLink="list-movie">Show All Current Movies</a>
+    </div>
     
-      <div class="card">
-        Book Movie
-      </div>
+    <div class="card">
+        <a routerLink="book-movie">Book Movie</a>
+    </div>
 </div>
 
-      <router-outlet></router-outlet>
+<router-outlet></router-outlet>
 
 
