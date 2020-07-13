@@ -1,1 +1,60 @@
-<p>create-movie-theatre works!</p>
+<h3 style="text-align: center;">Create Movie Theatre</h3>
+
+<table>
+    <tr>
+            <th><span style="float: left;">Name</span> </th>
+            <th><input  type="text" maxlength="15" [(ngModel)]="name" placeholder="Movie Theatre name"></th>
+    </tr>
+
+    <tr>
+            <th><span style="float: left;">Capacity</span> </th>
+            <th> 
+               <select [(ngModel)]="capacity" style="width: 50px">
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                </select>
+            </th>  
+    </tr>
+
+    <tr>
+        <table>       
+                <tr> <span class="label">Add Movies</span> </tr>
+                
+                <tr>
+                    <table>
+                        <tr *ngFor="let movie of movies; let i=index;">
+                            
+                            <!-- <th> Name </th>  -->
+                                <input type="text" maxlength="25" placeholder="Movie name" [(ngModel)]="movie.name" >
+                            
+                            <th> Slot :</th> 
+                                <!-- <select style="width: 150px">
+                                    <option *ngFor="let movieSlot of movieSlots" [(ngModel)]="movie.slot" ngDefaultControl>{{movieSlot}}</option>
+                                </select> -->
+
+                                <label>{{movie.slot}}</label>
+                        </tr>     
+                    </table>
+                </tr>
+
+                <!-- <tr> 
+                    <button style="float: left; background-color: cornflowerblue;" (click)="addMovie()" [disabled]="this.moviesMap.size==this.movieSlots.length"> 
+                        Add Movie (+)
+                    </button> 
+                </tr> -->
+
+        </table>
+    </tr>
+
+</table>
+
+
+<button style="background-color: darkseagreen; padding: 5px;" (click)="submit()">Create</button>
+
+
+
+<span style="float: right;"> 
+    <a href="javascript:void(0);" (click)="goBack()">Back to Dashboard</a>
+</span>
+

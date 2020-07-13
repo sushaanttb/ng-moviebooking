@@ -1,0 +1,15 @@
+.label{
+    display:block;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+button {
+    margin:auto;
+    display:block;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+}

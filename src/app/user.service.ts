@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 const userAPI = "http://localhost:8080/user";
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class UserService {
 
   constructor(private http: HttpClient) { }
