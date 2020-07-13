@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MovieTheatre } from '../app/movie-theatre'
+import { MovieTheatre } from '../app/movie-theatre';
+import { Booking } from '../app/booking';
 import { Observable } from 'rxjs';
 
 const movieTheatreAPI = "http://localhost:8080/movie-theatre";
@@ -41,6 +42,10 @@ export class MovieService {
 
   deleteMovieTheatreSubscription(id: string): Observable<Object> {
     return this.http.delete(movieTheatreAPI + "?id=" + id);
+  }
+
+  bookMovieSubscription(booking: Booking): Observable<Booking> {
+    return this.http.post<Booking>(movieTheatreAPI + "/book", booking);
   }
 
 }

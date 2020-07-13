@@ -1,1 +1,42 @@
-<p>book-movie works!</p>
+<h3>Book your show!</h3>
+<table>
+    <tr>
+        Select Movie Theatre
+        <select (change)="onSelectMovieTheatre(movieTheatreName)" [(ngModel)]="movieTheatreName">
+            <option *ngFor="let movieTheatre of movieTheatres" [value]="movieTheatre.name" >{{movieTheatre.name}}</option>
+        </select>
+    </tr>
+
+    <tr *ngIf="movieTheatreName">
+        Select Movie Slot
+        <select (change)="onSelectMovieSlot(movieSlot)" [(ngModel)]="movieSlot">
+            <option *ngFor="let slot of getMovieSlots()" [value]="slot" >{{slot}}</option>
+        </select>
+    </tr>
+
+    <tr *ngIf="movieSlot">
+        Select Movie
+        <select [(ngModel)]="movieName">
+            <option *ngFor="let movie of getMovies()" [value]="movie" >{{movie}}</option>
+        </select>
+    </tr>
+
+    <tr *ngIf="movieName">
+        Select No. of seats
+        <input type=number [(ngModel)]="numOfSeats" [min]="1" [max]="maxCapacityInTransaction">
+    </tr>
+
+    <tr style="text-align: center;">
+        <button (click)="book()" style="background-color:rgb(65, 184, 214); padding: 10px; margin-top: 25%;">Book</button>
+    </tr>
+
+    <div *ngIf="showBookingSuccessMessage" style="background-color:greenyellow; ">Booking created successfully!</div>
+
+</table>
+
+
+<div style="float: right;"> 
+    <a href="javascript:void(0);" (click)="goBack()">Back to Dashboard</a>
+</div>
+
+
