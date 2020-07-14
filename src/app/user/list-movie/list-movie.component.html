@@ -1,1 +1,35 @@
-<p>list-movie works!</p>
+<div style="float:right;">
+    <div *ngFor="let movieTheatre of movieTheatres" class="flip-card">
+        <div class= "flip-card-inner">
+            <div class="flip-card-front">
+                <h1>{{movieTheatre.name}}</h1>
+                <hr>
+                <p>{{movieTheatre.capacity}} seats</p>                
+                
+                
+                <div *ngIf="movieTheatre.currentMovie">
+                    <h3 style="text-align: left;">Movies:</h3>
+                    <p *ngFor="let movie of getMovies(movieTheatre)" style="text-align: left;">{{movie}}</p>
+                
+                    <h3>Currently Showing : {{movieTheatre.currentMovie}}</h3>   
+                </div>
+            </div>   
+       
+            <div class="flip-card-back">
+                <h3>Details</h3> 
+                <hr>
+                <table>
+                    
+                <h4>MovieTheatreId: {{movieTheatre.id}}</h4>
+                    
+                </table>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div style="float: left;"> 
+    <a href="javascript:void(0);" (click)="goBack()">Back to Dashboard</a>
+</div>
