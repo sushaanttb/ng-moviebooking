@@ -9,7 +9,8 @@ const movieTheatreAPI = "http://localhost:8080/movie-theatre";
 export class MovieTheatreInterface { name: string; slot: string };
 //ToDo: angular http bug
 //https://github.com/angular/angular/issues/32117
-export interface StringMap { [key: string]: string; }
+export interface StringMap { [key: string]: string }
+export interface BookingMap { [key: string]: Booking[] }
 
 @Injectable({ providedIn: 'root' })
 export class MovieService {

@@ -13,11 +13,15 @@ import { User } from 'src/app/user';
 })
 export class BookMovieComponent implements OnInit {
 
-  maxCapacityInTransaction: number = 9;
+  maxSeatsInTransaction: number = 9;
 
   currentUser: User;
   movieTheatres: MovieTheatre[] = [];
   slotMovies: Map<String, String[]> = new Map();
+  bookingsMap: Map<String, Booking[]> = new Map();
+  movieTheatreCapacity: number;
+  availableSeats: number;
+
 
   movieTheatreName: string;
   movieTheatreId: string;
@@ -32,7 +36,11 @@ export class BookMovieComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    this.fetchMovieTheatres();
 
+  }
+
+  fetchMovieTheatres() {
     this.movieService.getAllMovieTheatresSubscription()
       .subscribe(
         (data: MovieTheatre[]) => this.successHandlerForGetAllMovies(data),
@@ -45,12 +53,21 @@ export class BookMovieComponent implements OnInit {
   }
 
   onSelectMovieTheatre(movieTheatreName: string) {
-    this.resetAll();
+    this.resetAllDependencies();
     let movieTheatre = this.movieTheatres.find(m => m.name === movieTheatreName);
-    this.movieTheatreId = movieTheatre.id;
-    //ToDo: need to update based on existing bookings as well
-    if (movieTheatre.capacity < this.maxCapacityInTransaction) this.maxCapacityInTransaction = movieTheatre.capacity;
 
+    this.updateSelectedMovieTheatreInfo(movieTheatre);
+    this.fillBookings(movieTheatre);
+    this.fillSlotMovies(movieTheatre);
+  }
+
+  updateSelectedMovieTheatreInfo(movieTheatre: MovieTheatre) {
+    this.movieTheatreId = movieTheatre.id;
+    this.movieTheatreCapacity = movieTheatre.capacity;
+    if (movieTheatre.capacity < this.maxSeatsInTransaction) this.maxSeatsInTransaction = movieTheatre.capacity;
+  }
+
+  fillSlotMovies(movieTheatre: MovieTheatre) {
     Object.keys(movieTheatre.movies).forEach(key => {
       let existingVal = this.slotMovies.get(movieTheatre.movies[key]);
 
@@ -59,18 +76,33 @@ export class BookMovieComponent implements OnInit {
 
       this.slotMovies.set(movieTheatre.movies[key], existingVal);
     });
-
   }
 
-  resetAll() {
+  fillBookings(movieTheatre: MovieTheatre) {
+    Object.keys(movieTheatre.bookings).forEach(key => {
+      let existingVal: Booking[] = this.bookingsMap.get(key);
+
+      if (!existingVal || existingVal.length == 0) existingVal = [];
+      movieTheatre.bookings[key].forEach(val => existingVal.push(val));
+
+      this.bookingsMap.set(key, existingVal);
+    });
+  }
+
+
+  resetAllDependencies() {
     this.slotMovies = new Map();
     this.movieSlot = "";
     this.movieName = "";
     this.numOfSeats = 1;
+    this.bookingsMap = new Map();
+    this.movieTheatreCapacity = 0;
+    this.availableSeats = 0;
   }
 
-  resetMovieName() {
+  resetMovieDependencies() {
     this.movieName = "";
+    this.availableSeats = 0;
   }
 
   getMovieSlots(): String[] {
@@ -78,7 +110,24 @@ export class BookMovieComponent implements OnInit {
   }
 
   onSelectMovieSlot(movieSlot: string) {
-    this.resetMovieName();
+    this.resetMovieDependencies();
+  }
+
+  onSelectMovie(movieName: String) {
+    this.updateBookingCapacity(movieName);
+  }
+
+  updateBookingCapacity(movieName: String) {
+    let existingBookings = 0;
+    if (this.bookingsMap.get(movieName)) {
+      this.bookingsMap.get(movieName).forEach((b: Booking) => {
+        existingBookings += b.numOfSeatsBooked;
+      });
+    }
+
+    this.availableSeats = this.movieTheatreCapacity - existingBookings;
+
+    if (this.availableSeats < this.maxSeatsInTransaction) this.maxSeatsInTransaction = this.availableSeats;
   }
 
   getMovies(): String[] {
@@ -107,9 +156,10 @@ export class BookMovieComponent implements OnInit {
 
   bookingSuccessHandler(bookingResponse: Booking) {
     alert("Booking with Id: " + bookingResponse.id + "at " + bookingResponse.date + " generated successfully!");
-    this.resetAll();
+    this.resetAllDependencies();
     this.showBookingSuccessMessage = true;
     setTimeout(() => this.showBookingSuccessMessage = false, 3000);
+    this.fetchMovieTheatres();
   }
 
   goBack() {

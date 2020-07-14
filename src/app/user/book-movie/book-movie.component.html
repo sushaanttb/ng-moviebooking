@@ -1,4 +1,5 @@
 <h3>Book your show!</h3>
+<h5>Note: Max tickets which can be booked in a transaction: {{maxSeatsInTransaction}}</h5>
 <table>
     <tr>
         Select Movie Theatre
@@ -16,18 +17,21 @@
 
     <tr *ngIf="movieSlot">
         Select Movie
-        <select [(ngModel)]="movieName">
+        <select (change)="onSelectMovie(movieName)" [(ngModel)]="movieName">
             <option *ngFor="let movie of getMovies()" [value]="movie" >{{movie}}</option>
         </select>
+
+        Available Seats : {{availableSeats}}
     </tr>
 
+   
     <tr *ngIf="movieName">
         Select No. of seats
-        <input type=number [(ngModel)]="numOfSeats" [min]="1" [max]="maxCapacityInTransaction">
+        <input type=number [(ngModel)]="numOfSeats" [min]="1" [max]="maxSeatsInTransaction">
     </tr>
 
     <tr style="text-align: center;">
-        <button (click)="book()" style="background-color:rgb(65, 184, 214); padding: 10px; margin-top: 25%;">Book</button>
+        <button (click)="book()" [disabled]= "!movieName" style="background-color:rgb(65, 184, 214); padding: 10px; margin-top: 25%;">Book</button>
     </tr>
 
     <div *ngIf="showBookingSuccessMessage" style="background-color:greenyellow; ">Booking created successfully!</div>
