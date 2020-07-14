@@ -48,7 +48,7 @@ export class ListMovieComponent implements OnInit {
         tmpBookings.forEach((b: Booking) => availableMovieSeats -= b.numOfSeatsBooked);
       }
 
-      movieArray.push(names[i] + " (" + slots[i] + ") " + " Available seats: " + availableMovieSeats);
+      movieArray.push(names[i] + " (" + slots[i] + ") " + ((availableMovieSeats == 0) ? ' Sold Out! ' : "Available seats: " + availableMovieSeats));
 
     }
     return movieArray;
