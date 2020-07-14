@@ -25,13 +25,13 @@
     </tr>
 
    
-    <tr *ngIf="movieName">
+    <tr *ngIf="movieName && availableSeats>0">
         Select No. of seats
         <input type=number [(ngModel)]="numOfSeats" [min]="1" [max]="maxSeatsInTransaction">
     </tr>
 
     <tr style="text-align: center;">
-        <button (click)="book()" [disabled]= "!movieName" style="background-color:rgb(65, 184, 214); padding: 10px; margin-top: 25%;">Book</button>
+        <button (click)="book()" [disabled]= "!movieName || availableSeats==0" style="background-color:rgb(65, 184, 214); padding: 10px; margin-top: 25%;">Book</button>
     </tr>
 
     <div *ngIf="showBookingSuccessMessage" style="background-color:greenyellow; ">Booking created successfully!</div>
