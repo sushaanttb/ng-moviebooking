@@ -1,12 +1,24 @@
-<div *ngIf="this.user.tickets.length>0">
+<div *ngIf="tickets.length>0" style="float: right;">
 
     <h3>Ticket Details:</h3>
-    <div class="result">
-        {{this.user.tickets | json}}
+    
+    <div *ngFor ="let ticket of tickets " class="flip-card">
+       <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <h3>{{ticket.movieName}}</h3>({{ticket.movieSlot}})
+                <p>No.of seats : {{ticket.numOfSeatsBooked}}</p>
+                <p>Date : {{ticket.date}}</p>
+            </div>
+           <div class="flip-card-back">
+                <p>TicketId : {{ticket.id}}</p>
+          </div>
+       </div>
+
+     
     </div>
 </div>
 
-<div *ngIf="this.user.tickets.length==0">
+<div *ngIf="tickets.length==0">
     <h3 style="text-align: center;">No tickets!</h3>
 </div>
 

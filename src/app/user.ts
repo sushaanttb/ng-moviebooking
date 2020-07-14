@@ -1,7 +1,9 @@
+import { Ticket } from './ticket';
+
 export class User {
     public userName?: string;
     public isAdmin?: string;
-    public tickets?: any[];
+    public tickets?: Ticket[];
 
     constructor(
         fields: {
@@ -9,7 +11,7 @@ export class User {
             password?: string,
             address?: string,
             isAdmin?: boolean
-            tickets?: any[]
+            tickets?: Ticket[]
         }
     ) {
         Object.assign(this, fields);
